@@ -22,11 +22,11 @@ as JavaScript text files on your host RPi.
 # Getting Started with the *node-runner-rpi* Container
 
 First, determine (and if necessary create) the folder on your host server that you want to map
-into the *node-runner* Container's */node* directory.
+into the *node-runner-rpi* Container's */node* directory.
 
 In these instructions, I'll assume you're using a folder named *~/test*
 
-In this folder, create a Node.js script file.  By default, the *node-runner* will look
+In this folder, create a Node.js script file.  By default, the *node-runner-rpi* will look
 for a script file named *node-script.js*.
 
 The script file MUST be a Node.js module that defines a function.  The function will
@@ -46,7 +46,7 @@ Now you can run your script by doing the following:
 You should see the following:
 
 
-        > node-runner@0.0.1 start /src
+        > node-runner-rpi@0.0.2 start /src
         > NODE_PATH=/src node node-runner.js
         
         *************** Welcome to Node Runner ***************
@@ -57,14 +57,14 @@ You should see the following:
         *************** Node Runner will now terminate ***************
 
 
-Congratulations! Your Node.js script has been invoked by *node-runner*.
+Congratulations! Your Node.js script has been invoked by *node-runner-rpi*.
 
-Notice how the *node-runner* Container automatically terminated when your script was completed.
+Notice how the *node-runner-rpi* Container automatically terminated when your script was completed.
 
 
 # Customising the Script Name to be Invoked
 
-If you want the *node-runner* to invoke a different Script file, you can define its name using the
+If you want the *node-runner-rpi* to invoke a different Script file, you can define its name using the
 environment variable *node_script* when you start the Container.
 
 For example, rename your script file from *node-script.js* to *myScript.js*.
@@ -84,7 +84,7 @@ files within the mapped volume.
 Your script has full read/write access to the mapped volume, so any changes you make to files or
 sub-folders within it will take effect permanently on the host RPi.
 
-The *node-runner* Container is therefore useful for:
+The *node-runner-rpi* Container is therefore useful for:
 
 - running ad-hoc Node.js scripts for testing or demonstration purposes
 - creating installation or configuration scripts, eg to create files that can be run in
@@ -116,7 +116,7 @@ For example, create a file with the path *~/test/npm_install.json* containing:
 eg All array elements must be double-quoted, and the file cannot contain any comments.
 
 
-Run the *node-runner* container again:
+Run the *node-runner-rpi* container again:
 
 
         docker run -it --name node-runner --rm -v ~/test:/node -e "node_script=myScript" rtweed/node-runner-rpi
@@ -124,7 +124,7 @@ Run the *node-runner* container again:
 
 This time you'll see:
 
-        > node-runner@0.0.1 start /src
+        > node-runner-rpi@0.0.2 start /src
         > NODE_PATH=/src node node-runner.js
         
         *************** Welcome to Node Runner ***************
@@ -160,9 +160,9 @@ has been created, and it will contain the module(s) you asked it to load.
 If you try running your script again, this time it will see that the modules in your *npm_install.json*
 file have already been loaded in a previous run, so it will not re-load them, eg:
 
-        docker run -it --name node-runner --rm -v ~/test:/node -e "node_script=myScript" rtweed/node-runner
+        docker run -it --name node-runner --rm -v ~/test:/node -e "node_script=myScript" rtweed/node-runner-rpi
 
-        > node-runner@0.0.1 start /src
+        > node-runner-rpi@0.0.2 start /src
         > NODE_PATH=/src node node-runner.js
         
         *************** Welcome to Node Runner ***************
@@ -229,14 +229,14 @@ Yes. Simply add the version number after the module name, using @ as the delimit
 # Can I Reset the Node Modules that have been Previously Loaded?
 
 Yes, you can simply delete the *node_modules* directory that was created in the folder you mapped.
-Next time you run the *node-runner* Container, it will recreate the *node_modules* sub-folder 
+Next time you run the *node-runner-rpi* Container, it will recreate the *node_modules* sub-folder 
 and reload into it any modules defined in your
 *npm_install.json* file.
 
 
 # What is the *this* Context within my Script?
 
-The core *node-runner* module sets the *this* context of your script to an object that contains
+The core *node-runner-rpi* module sets the *this* context of your script to an object that contains
 a number of functions and modules that you may find useful in your script, eg:
 
 - this.fs: provides you with the [*fs-extra*](https://www.npmjs.com/package/fs-extra) module, but also includes several additional functions that you may find useful:
@@ -267,7 +267,7 @@ the environment variable *SILENT=true* to the *docker run* command, eg:
 Now you'll just see an initial couple of messages from Node.js starting in the container, 
 followed by any messages your own script generates, eg:
 
-        > node-runner@0.0.1 start /src
+        > node-runner-rpi@0.0.2 start /src
         > NODE_PATH=/src node node-runner.js
        
         
