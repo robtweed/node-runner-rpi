@@ -1,0 +1,16 @@
+{
+    "name": "node-runner",
+    "version": "0.0.2",
+    "description": "Simple Dockerised Node.js Script Runner",
+    "author": "Rob Tweed <rob.tweed@gmail.com>",
+    "dependencies": {
+      "readline-sync": "",
+      "fs-extra": "",
+      "module-exists": "",
+      "qewd-transform-json": "",
+      "uuid": ""
+    },
+    "scripts": {
+      "start": "NODE_PATH=/src node node-runner.js"
+    }
+}
