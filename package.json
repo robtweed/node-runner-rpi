@@ -1,14 +1,15 @@
 {
-    "name": "node-runner",
-    "version": "0.0.2",
-    "description": "Simple Dockerised Node.js Script Runner",
+    "name": "node-runner-rpi",
+    "version": "0.0.3",
+    "description": "Simple Dockerised Node.js Script Runner: Raspberry Pi Version",
     "author": "Rob Tweed <rob.tweed@gmail.com>",
     "dependencies": {
       "readline-sync": "",
       "fs-extra": "",
       "module-exists": "",
       "qewd-transform-json": "",
-      "uuid": ""
+      "uuid": "",
+      "tcp-netx": ""
     },
     "scripts": {
       "start": "NODE_PATH=/src node node-runner.js"
